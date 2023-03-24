@@ -5,3 +5,22 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4
 
 username="admin"
 password="coo!lbr0"
+
+JIRA_TOKEN =     "bbbbbbasdfasdfas342@34222"
+
+jira_tkn = "tadskfjaslzvx8u8z234234"
+
+token_list = [
+ "dafsdfaskjvklzxjcvw34@341!",
+  "asdfasldkfjljzkxlvjkl34522",
+"adsfasdfasdfasdfasdzzz",
+]
+
+user_emails = [
+ "email6@hosted.com",
+  "email5@hosted.com",
+   "email4@hosted.com",
+    "email3@hosted.com",
+     "email2@hosted.com",
+      "email1@hosted.com"
+      ]
