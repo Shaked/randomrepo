@@ -1,0 +1,31 @@
+name: Default Cluster Templates
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+        - 'test/**'
+
+  workflow_dispatch:
+
+jobs:
+  copy-templates:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run changed-files with dir_names
+        id: changed-files-dir-names
+        uses: tj-actions/changed-files@v35
+        with:
+          dir_names: "true"
+
+      - name: List all added files
+        run: |
+          for file in ${{ steps.changed-files.outputs.added_files }}; do
+            echo "$file was added"
+          done
