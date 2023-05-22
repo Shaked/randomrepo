@@ -4,7 +4,7 @@ on:
   push:
     branches: [ "main" ]
     paths:
-        - 'test/**'
+        - 'test/**/flux-system'
 
   workflow_dispatch:
 
