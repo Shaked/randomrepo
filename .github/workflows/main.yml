@@ -20,7 +20,7 @@ jobs:
       - name: Commit changes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          FILE_TO_COMMIT: ./test/test.txt
+          FILE_TO_COMMIT: test/test.txt
           DESTINATION_BRANCH: main
         run: |
           NEW_APP_VERSION="${{ github.sha }}"
