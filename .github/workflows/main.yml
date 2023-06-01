@@ -17,17 +17,24 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Push changes
+      - name: Commit changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FILE_TO_COMMIT: ./test/test.txt
+          DESTINATION_BRANCH: main
         run: |
           NEW_APP_VERSION="${{ github.sha }}"
           echo "Updating image version to $NEW_APP_VERSION" > ./test/test.txt
-          git pull
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
-          git config commit.gpgsign true
-          git add ./test/
-          git commit -m "auto: update default version to $NEW_APP_VERSION" --allow-empty
-          git push
+          export TODAY=$( date -u '+%Y-%m-%d' )
+          export MESSAGE="auto: update default version to $NEW_APP_VERSION"
+          export SHA=$( git rev-parse $DESTINATION_BRANCH:$FILE_TO_COMMIT )
+          export CONTENT=$( base64 -i $FILE_TO_COMMIT )
+          gh api --method PUT /repos/:owner/:repo/contents/$FILE_TO_COMMIT \
+            --field message="$MESSAGE" \
+            --field content="$CONTENT" \
+            --field encoding="base64" \
+            --field branch="$DESTINATION_BRANCH" \
+            --field sha="$SHA"
       - name: Run changed-files with dir_names
         id: changed-files-dir-names
         uses: tj-actions/changed-files@v35
